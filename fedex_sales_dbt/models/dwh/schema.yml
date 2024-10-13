@@ -1,0 +1,73 @@
+
+version: 2
+
+models:
+  - name: dim_orders
+    description: "Orders dimension table"
+    columns:
+      - name: order_id
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+          
+  - name: dim_products
+    description: "Products dimension table"
+    columns:
+      - name: product_id
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_address
+    description: "address dimension table"
+    columns:
+      - name: address_id
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_date
+    description: "date dimension table"
+    columns:
+      - name: order_date
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+
+  - name: fct_order_line
+    description: "order_line fact table"
+    columns:
+      - name: Row_ID
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null 
+      - name: order_id
+        description: "The foriegn key for dim_address"
+        tests:
+          - relationships:
+              to: ref('dim_orders')
+              field: order_id
+      - name: product_id
+        description: "The foriegn key for dim_products"      
+        tests:
+          - relationships:
+              to: ref('dim_products')
+              field: product_id 
+      - name: address_id
+        description: "The foriegn key for dim_address"      
+        tests:
+          - relationships:
+              to: ref('dim_address')
+              field: address_id  
+      - name: order_date
+        description: "The foriegn key for dim_date"      
+        tests:
+          - relationships:
+              to: ref('dim_date')
+              field: order_date               
+

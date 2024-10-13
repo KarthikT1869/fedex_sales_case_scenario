@@ -1,0 +1,11 @@
+
+version: 2
+
+sources:
+  - name: sales_dl
+    schema: sales_dl
+    
+    tables:
+        - name: amazon_sales_report
+    
+    
